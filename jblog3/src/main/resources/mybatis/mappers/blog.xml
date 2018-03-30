@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="blog">
+
+<update id="update" parameterType="blogvo">
+	
+	<choose >
+		<when test= "image!=null">
+		<![CDATA[
+	update blog set title = #{title}, image = #{image} where user_no = #{user_no}
+	]]>
+	   	</when>
+	   	<otherwise>
+	   	<![CDATA[
+	   	update blog set title = #{title} where user_no = #{user_no}
+	   	]]>
+	   	</otherwise>
+	</choose>
+		
+</update>
+
+
+
+<select id="getlist" resultType="blogvo" >
+	<![CDATA[
+	
+			select a.user_no , a.title, a.image from blog a, user b
+			where a.user_no = b.no;			
+
+
+	]]>
+	</select>
+	
+<select id="categorylist" resultType="categoryvo" >
+	<![CDATA[
+	
+			select * from category
+
+
+	]]>
+	</select>
+	
+
+<select id="getcategory" resultType="categoryvo" >
+	<![CDATA[
+	
+			select * from category
+
+
+	]]>
+	</select>
+	
+<insert id="categoryadd" parameterType ="hashMap">
+
+	<![CDATA[
+	
+			insert
+			into category
+			values(null,#{vo.posttype},#{vo.content},#{user_no})
+
+
+	]]>
+</insert>
+
+
+<delete id="categorydelete" parameterType = "Long">
+<![CDATA[
+		
+		delete from category where no = #{no}
+		
+]]>
+</delete>
+
+
+<insert id="postadd" parameterType ="postvo">
+
+	<![CDATA[
+	
+			insert
+			into post
+			values(null,#{title},#{content},now(),#{cate_no})
+
+
+	]]>
+</insert>
+
+</mapper>

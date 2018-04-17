@@ -23,12 +23,12 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 			Object handler)
 			throws Exception {
 	
-			String email = request.getParameter("id");
+			String id = request.getParameter("id");
 			String password = request.getParameter("passwd");
 
 			UserVo vo = new UserVo();
 			
-			vo.setId(email);
+			vo.setId(id);
 			vo.setPasswd(password);
 	
 			
@@ -49,6 +49,8 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 				
 				return false;
 			}
+			
+			System.out.println("DDDDDDDDDD" + authUser);
 			
 			HttpSession session = request.getSession(true);
 			session.setAttribute("authUser", authUser);

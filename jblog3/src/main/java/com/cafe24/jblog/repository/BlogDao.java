@@ -41,11 +41,16 @@ public class BlogDao {
 		return list;
 	}
 
-	public int categoryadd(Map map) {
+	public CategoryVo categoryadd(CategoryVo vo) {
 
-		int count = sqlSession.insert("blog.categoryadd", map);
 
-		return count;
+		
+		int count = sqlSession.insert("blog.categoryadd", vo);
+		
+		System.out.println("리턴값을 받아야지 다오임");
+
+		
+		return vo;
 	}
 
 	public int categorydelete(Long no) {
@@ -69,4 +74,43 @@ public class BlogDao {
 
 		return count;
 	}
+	
+
+	public List<PostVo> postlist() {
+
+		List<PostVo> list = sqlSession.selectList("blog.postlist");
+
+		return list;
+	}
+
+	public PostVo getpostbyno(Long no) {
+
+		PostVo vo = sqlSession.selectOne("blog.getpostbyno", no);
+
+		return vo;
+	}
+	
+	public List<PostVo> catepostlist(Long no) {
+
+		List<PostVo> list = sqlSession.selectList("blog.catepostlist", no);
+
+		return list;
+	}
+
+	public Long getcateno(Long no) {
+
+	
+		Long cate_no = sqlSession.selectOne("blog.getcateno", no);
+		
+
+		return cate_no;
+	}
+	
+	public int postcount(Long no) {
+	
+		int count = sqlSession.update("blog.postcount", no);
+
+		return count;
+	}
+	
 }

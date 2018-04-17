@@ -12,7 +12,7 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>Spring 이야기</h1>
+			<h1>${map.vo.title } 이야기</h1>
 			<c:import url ="/WEB-INF/views/includes/blog-header.jsp" />
 		</div>
 		<div id="wrapper">
@@ -21,8 +21,10 @@
 					<li><a href="${pageContext.servletContext.contextPath }/blog/admin">기본설정</a></li>
 					<li><a href="${pageContext.servletContext.contextPath }/blog/category">카테고리</a></li>
 					<li class="selected"><a href="${pageContext.servletContext.contextPath }/blog/write">글작성</a></li>
+					<li><a href="${pageContext.servletContext.contextPath }/${authUser.id}">메인화면</a></li>
+					
 				</ul>
-				<form action="${pageContext.servletContext.contextPath }/blog/postadd" method="post">
+				<form action="${pageContext.servletContext.contextPath }/blog/postadd" method="GET">
 			      	<table class="admin-cat-write">
 			      		
 			      		<tr>
@@ -31,7 +33,7 @@
 			      				<input type="text" size="60" name="title">
 			      		
 				      			<select name="cate_no">
-				      				<c:forEach items="${ list }" var="list" varStatus="status">
+				      				<c:forEach items="${ map.list }" var="list" varStatus="status">
 				  
 				      				<option value="${ list.no }" name = "cate_no">${list.posttype}</option>
 

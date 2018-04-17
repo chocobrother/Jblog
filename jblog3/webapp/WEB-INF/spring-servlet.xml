@@ -95,6 +95,7 @@
 			<mvc:exclude-mapping path="/user/auth" />
 			<mvc:exclude-mapping path="/user/logout" />
 			<mvc:exclude-mapping path="/assets/**" />
+			<mvc:exclude-mapping path="/uploads/**" />
 			<bean class="com.cafe24.security.AuthInterceptor" />
 		</mvc:interceptor>
 

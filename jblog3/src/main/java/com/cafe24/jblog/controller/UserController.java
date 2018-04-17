@@ -71,12 +71,12 @@ public class UserController {
 //		return "redirect:/main";
 //	}
 //	
-//	@RequestMapping("/logout")
-//	public String logout(HttpSession session) {
-//		session.removeAttribute("authUser");
-//		session.invalidate();
-//		
-//		return "redirect:/main";
-//	}
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("authUser");
+		session.invalidate();
+		
+		return "redirect:/main";
+	}
 	
 }

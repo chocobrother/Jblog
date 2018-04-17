@@ -21,8 +21,11 @@
 					<li class="selected"><a href="${pageContext.servletContext.contextPath }/blog/category">기본설정</a></li>
 					<li><a href="${pageContext.servletContext.contextPath }/blog/category">카테고리</a></li>
 					<li><a href="${pageContext.servletContext.contextPath }/blog/write">글작성</a></li>
+					<li><a href="${pageContext.servletContext.contextPath }/${authUser.id}">메인화면</a></li>
 				</ul>
-				<form action="${pageContext.servletContext.contextPath }/blog/update?user_no=${sessionScope.authUser.no}" 
+				<!--  <form action="${pageContext.servletContext.contextPath }/blog/update?user_no=${sessionScope.authUser.no}" 
+				method="post" enctype="multipart/form-data">-->
+				<form action="${pageContext.servletContext.contextPath }/${authUser.id}/${authUser.no}" 
 				method="post" enctype="multipart/form-data">
 	 		      	<table class="admin-config">
 			      		<tr>

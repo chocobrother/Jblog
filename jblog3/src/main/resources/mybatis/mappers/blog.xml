@@ -51,16 +51,23 @@
 	]]>
 	</select>
 	
-<insert id="categoryadd" parameterType ="hashMap">
+<insert id="categoryadd" parameterType ="categoryvo" >
 
 	<![CDATA[
 	
 			insert
 			into category
-			values(null,#{vo.posttype},#{vo.content},#{user_no})
+			values(null,#{posttype},#{content},0,#{user_no})
 
 
 	]]>
+	
+	<selectKey keyProperty="no" resultType="Long"   order="AFTER">
+	<![CDATA[
+		select last_insert_id()
+	]]>
+
+	</selectKey>
 </insert>
 
 
@@ -83,6 +90,58 @@
 
 
 	]]>
+	
 </insert>
+
+<select id="postlist" resultType="postvo" >
+	<![CDATA[
+	
+			select * from post order by postdate desc
+			limit 5;
+
+
+	]]>
+	</select>
+	
+<select id="getpostbyno" parameterType = "Long" resultType="postvo" >
+	<![CDATA[
+	
+			select title, content, cate_no from post where post_no = #{post_no};			
+
+
+	]]>
+	</select>
+	
+	
+	<select id="catepostlist" parameterType = "Long" resultType="postvo" >
+	<![CDATA[
+	
+			select * from post where cate_no = #{cate_no};
+
+	]]>
+	</select>
+	
+	
+	<select id="getcateno" resultType="long" parameterType="long" >
+	<![CDATA[
+	
+			select cate_no from post where post_no = #{post_no}
+
+
+	]]>
+	</select>
+	
+	
+	
+	<update id="postcount" parameterType="long">
+	
+	
+	<![CDATA[
+	update category set count = count+1 where no = #{no}
+	]]>
+	 
+		
+</update>
+	
 
 </mapper>

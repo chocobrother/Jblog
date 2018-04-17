@@ -3,6 +3,7 @@ package com.cafe24.jblog.service;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,9 +40,9 @@ public class BlogService {
 
 	public String restore(MultipartFile multipartFile) {
 
-//		if(multipartFile ==null || multipartFile.getOriginalFilename().equals("")) {
-//			return null;
-//		}
+		if(multipartFile ==null || multipartFile.getOriginalFilename().equals("")) {
+			return null;
+		}
 		
 		String url = "";
 
@@ -122,9 +123,29 @@ public class BlogService {
 		return list;
 	}
 
-	public void categoryadd(Map map) {
-		blogDao.categoryadd(map);
+
+	
+	public CategoryVo categoryadd(CategoryVo vo) {
+	
+	
+	System.out.println("서비스에서 vo확인 하기" + vo);
+		
+	blogDao.categoryadd(vo);
+	
+	System.out.println("리턴 Vo 받아야지 서비스임");
+	
+		return vo;
 	}
+//	public Map categoryadd(Map map) {
+//		
+//		Map<String,Object> returnMap = new HashMap<String,Object>();	
+//		
+//		returnMap = blogDao.categoryadd(map);
+//		
+//		System.out.println("리턴맵을 받아야지 서비스임");
+//		
+//		return returnMap;
+//	}
 
 	public void categorydelete(Long no) {
 		blogDao.categorydelete(no);
@@ -140,5 +161,54 @@ public class BlogService {
 	public void postadd(PostVo vo) {
 		blogDao.postadd(vo);
 	}
+	
+	
+	public List<PostVo> postlist()
 
+	{
+
+		List<PostVo> list = blogDao.postlist();
+
+		return list;
+	}
+
+	public PostVo getpostbyno(Long no)
+
+	{
+		PostVo vo = blogDao.getpostbyno(no);
+
+		return vo;
+	}
+	
+	public List<PostVo> catepostlist(Long no)
+
+	{
+
+		List<PostVo> list = blogDao.catepostlist(no);
+
+		return list;
+	}
+
+
+	public Long getcateno(Long no)
+
+	{
+
+		Long cate_no = blogDao.getcateno(no);
+
+		return cate_no;
+	}
+
+	
+
+	public void postcount(Long no)
+
+	{
+
+		blogDao.postcount(no);
+
+		
+	}
+
+	
 }
